@@ -6,7 +6,7 @@ from django.http import HttpRequest, JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from .forms import TemplateForm, AuthenticationForm, AuthenticationFormRusError, CustomUserCreationForm
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 
 # def template_view(request):
@@ -79,6 +79,15 @@ class MyTemplView(TemplateView):
         context["form"] = form  # Записываем в контекст форму
         return self.render_to_response(context)  # Возвращаем вызов метода render_to_response
 
+
+class MyFormView(FormView):
+    template_name = 'app/template_form.html'  # Шаблон, который будет рендерится
+    form_class = TemplateForm  # Класс формы, который будет валидироваться
+    success_url = '/'  # Ссылка для перехода при удачной валидации
+
+    def form_valid(self, form):
+        return JsonResponse(form.cleaned_data)
+
 # def login_view(request):
 #     if request.method == "GET":
 #         return render(request, 'app/login.html')
@@ -90,6 +99,8 @@ class MyTemplView(TemplateView):
 #             login(request, user)
 #             return redirect("app:user_profile")
 #         return render(request, "app/login.html", context={"error": "Неверные данные"})
+
+
 def login_view(request):
     if request.method == "GET":
         return render(request, 'app/login.html')
