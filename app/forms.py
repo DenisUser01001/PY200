@@ -5,6 +5,11 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 class TemplateForm(forms.Form):
     my_text = forms.CharField()
+    my_password = forms.CharField(widget=forms.PasswordInput)
+    my_email = forms.EmailField()
+    my_date = forms.DateField()
+    my_number = forms.IntegerField()
+    my_checkbox = forms.BooleanField()
     # choices в ChoiceField нужен только для отображения в HTML форме
     my_select = forms.ChoiceField(choices=(
         ("begin", "Начальные"),

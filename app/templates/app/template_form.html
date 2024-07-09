@@ -74,7 +74,13 @@
                             <textarea id="my_textarea" name="my_textarea" rows="10" placeholder="Начни писать здесь" required></textarea>
                         </div>
                         <!-- В форме всегда присутствует кнопка чтобы что-то отправить. Кнопку не изменять! -->
-						<div class="mb-3"> 
+						{% if form.errors %}
+    						<div class="mb-3 d-flex align-items-center">
+       							<span style="color: red; font-size: 16px">{{ form.errors }}</span>
+    						</div>
+						{% endif %}
+
+						<div class="mb-3">
 							<button type="submit" class="btn btn-block">
 								Отправить данные
 							</button>
