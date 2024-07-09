@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from .models import get_random_text
+from django.views import View
 from django.http import HttpRequest, JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
@@ -47,6 +48,22 @@ def template_view(request):
             return JsonResponse(data=form.cleaned_data, json_dumps_params={"indent": 4,
                                                                            "ensure_ascii": False})
         return render(request, 'app/template_form.html', context={"form": form})
+
+
+class TemplView(View):
+    def get(self, request):
+        return render(request, 'app/template_form.html')
+
+    def post(self, request):
+        received_data = request.POST  # Приняли данные в словарь
+
+        form = TemplateForm(received_data)  # Передали данные в форму
+        if form.is_valid():  # Проверили, что данные все валидные
+            return JsonResponse(data=form.cleaned_data, json_dumps_params={"indent": 4,
+                                                                           "ensure_ascii": False})
+        return render(request, 'app/template_form.html', context={"form": form})
+
+
 
 
 # def login_view(request):
