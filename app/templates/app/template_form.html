@@ -19,19 +19,49 @@
 					<h4 class="text-center mb-4">
 						Заголовок вашей формы
 					</h4>
-					<form method="post">
+					<form action="" method="post">
                         {% csrf_token %}
-						<!-- Запишите здесь тег {% csrf_token %} -->
 
-                        <label for="my_text">Введи своё имя</label>  <!--for="my_text" это привязка к объекту с id="my_text", id - всегда должен быть уникален во всем HTML документе-->
+                        <label for="my_text">Введите своё имя</label>  <!--for="my_text" это привязка к объекту с id="my_text", id - всегда должен быть уникален во всем HTML документе-->
                         <div class="form-input">  <!-- Блок для оборачивания строки формы -->
-                            <span><i class="fa fa-id-card"></i></span>  <!-- Fontawesom картинка в строке ввода-->
-							<input type="text" id="my_text" name="my_text" placeholder="Иван" required>  <!-- Строка ввода-->
+                            <span><i class="fa fa-user-plus" aria-hidden="true"></i></i></span>  <!-- Fontawesom картинка в строке ввода-->
+							<input type="text" id="my_text" name="my_text" placeholder="Ваше имя" required>  <!-- Строка ввода-->
 						</div>
+
+						<label for="my_password">Придумайте свой пароль для входа</label>
+                        <div class="form-input">  <!-- Блок для оборачивания строки формы -->
+                            <span><i class="fa fa-key" aria-hidden="true"></i></span>  <!-- Fontawesom картинка в строке ввода-->
+							<input type="password" id="my_password" name="my_password" placeholder="Придумайте пароль" required>  <!-- Строка ввода-->
+						</div>
+
+						<label for="my_email">Введите свою email</label>
+                        <div class="form-input">  <!-- Блок для оборачивания строки формы -->
+                            <span><i class="fa fa-envelope" aria-hidden="true"></i></span>  <!-- Fontawesom картинка в строке ввода-->
+							<input type="email" id="my_email" name="my_email" placeholder="info@mail.com" required>  <!-- Строка ввода-->
+						</div>
+
+						<label for="my_date">Введите свою дату рождения</label>
+                        <div class="form-input">  <!-- Блок для оборачивания строки формы -->
+                            <span><i class="fa fa-birthday-cake" aria-hidden="true"></i></span>  <!-- Fontawesom картинка в строке ввода-->
+							<input type="date" id="my_date" name="my_date" required>  <!-- Строка ввода-->
+						</div>
+
+						<label for="my_number">Введите любое целое число</label>
+                        <div class="form-input">  <!-- Блок для оборачивания строки формы -->
+                            <span><i class="fa fa-gift" aria-hidden="true"></i></span>  <!-- Fontawesom картинка в строке ввода-->
+							<input type="number" id="my_number" name="my_number" required>  <!-- Строка ввода-->
+						</div>
+
+						<label for="my_checkbox">Согласие на обработку данных</label>
+                        <div class="form-input">  <!-- Блок для оборачивания строки формы -->
+                            <span><i class="fa fa-handshake-o" aria-hidden="true"></i></i></span>  <!-- Fontawesom картинка в строке ввода-->
+							<input type="checkbox" id="my_checkbox" name="my_checkbox" required>  <!-- Строка ввода-->
+						</div>
+
                         <!-- Поле с выбором -->
                         <label for="my_select">Выберите свои знания в Python</label>
                         <div class="form-input">
-							<span><i class="fa fa-free-code-camp"></i></span>
+							<span><i class="fa fa-bullhorn" aria-hidden="true"></i></i></span>
                             <select id="my_select" name="my_select" required>
                                 <option value="begin">Начальные</option>
                                 <option value="middle">Средние</option>
@@ -39,25 +69,10 @@
                             </select>
 						</div>
                         <!-- Многострочное поле -->
-                        <label for="my_textarea">Расскажи о себе</label>
+                        <label for="my_textarea">Расскажите о себе</label>
                         <div class="form-input">
                             <textarea id="my_textarea" name="my_textarea" rows="10" placeholder="Начни писать здесь" required></textarea>
                         </div>
-
-                        <!-- Добавьте своих полей --------------------------------------------------------------------->
-                        <!-- Сформируйте и заполните нужные строки ввода (оберните их <div class="form-input"> как показано выше. Это нужно чтобы были одинаковые стили)-->
-
-                        <!---- Добавьте еще поле для ввода email (придумайте текст для label)---->
-
-                        <!---- Добавьте еще поле для ввода пароля (придумайте текст для label)---->
-
-                        <!---- Добавьте еще поле для ввода даты (придумайте текст для label)---->
-
-                        <!---- Добавьте еще поле для ввода целого значения (придумайте текст для label)---->
-
-                        <!---- Добавьте еще поле для переключателя checkbox (придумайте текст для label)---->
-                        <!--------------------------------------------------------------------------------------------->
-
                         <!-- В форме всегда присутствует кнопка чтобы что-то отправить. Кнопку не изменять! -->
 						<div class="mb-3"> 
 							<button type="submit" class="btn btn-block">

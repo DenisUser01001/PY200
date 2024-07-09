@@ -15,10 +15,17 @@ def template_view(request):
 
         # как пример получение данных по ключу `my_text`
         # my_text = received_data.get('my_text')
-
-        # TODO Проведите здесь получение и обработку данных если это необходимо
-
-        # TODO Верните HttpRequest или JsonResponse с данными
+        return JsonResponse(data=
+                            {
+                                "my_name": received_data.get("my_text"),
+                                "my_password": received_data.get("my_password"),
+                                "my_email": received_data.get("my_email"),
+                                "my_date": received_data.get("my_date"),
+                                "my_number": received_data.get("my_number"),
+                                "my_agreement": received_data.get("my_checkbox"),
+                                "my_Py_lvl": received_data.get("my_select"),
+                                "about_me": received_data.get("my_textarea"),
+                            }, json_dumps_params={"ensure_ascii": False, "indent": 4})
 
 
 def login_view(request):
