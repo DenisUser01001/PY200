@@ -6,6 +6,7 @@ from django.http import HttpRequest, JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from .forms import TemplateForm, AuthenticationForm, AuthenticationFormRusError, CustomUserCreationForm
+from django.views.generic import TemplateView
 
 
 # def template_view(request):
@@ -64,7 +65,19 @@ class TemplView(View):
         return render(request, 'app/template_form.html', context={"form": form})
 
 
+class MyTemplView(TemplateView):
+    template_name = 'app/template_form.html'
 
+    def post(self, request, *args, **kwargs):
+        received_data = request.POST  # Приняли данные в словарь
+
+        form = TemplateForm(received_data)  # Передали данные в форму
+        if form.is_valid():  # Проверили, что данные все валидные
+            return JsonResponse(data=form.cleaned_data, json_dumps_params={"indent": 4,
+                                                                           "ensure_ascii": False})
+        context = self.get_context_data(**kwargs)  # Получаем контекст, если он есть
+        context["form"] = form  # Записываем в контекст форму
+        return self.render_to_response(context)  # Возвращаем вызов метода render_to_response
 
 # def login_view(request):
 #     if request.method == "GET":
