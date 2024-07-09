@@ -26,7 +26,7 @@
                         {% csrf_token %}
 						<div class="form-input">
 							<span><i class="fa fa-user-o"></i></span>
-							<input type="text" name="username" placeholder="Введите ваш username" tabindex="10"required>
+							<input type="text" name="username" placeholder="Введите ваш username" tabindex="10" required>
 						</div>
 						<div class="form-input">
 							<span><i class="fa fa-key"></i></span>
@@ -68,7 +68,7 @@
 							
 						<div class="row mb-3">
                             <div class="col-4">
-								<a href="" class="btn btn-block btn-social btn-github">
+								<a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-social btn-github">
 									<i class="fa fa-github"></i>
 								</a>
 							</div>
@@ -88,7 +88,7 @@
 							
 						<div class="text-center mb-5">
 							Нет аккаунта?
-							<a class="register-link" href="{% url "app:register" %}">Зарегистрируйтесь здесь</a>
+							<a class="register-link" href="{% url 'app:register' %}">Зарегистрируйтесь здесь</a>
 						</div>
 					</form>
 				</div>
