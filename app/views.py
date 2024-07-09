@@ -6,7 +6,9 @@ from django.http import HttpRequest, JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from .forms import TemplateForm, AuthenticationForm, AuthenticationFormRusError, CustomUserCreationForm
+
 from django.views.generic import TemplateView, FormView
+from django.contrib.auth.views import LoginView
 
 
 # def template_view(request):
@@ -113,6 +115,13 @@ def login_view(request):
             login(request, user)
             return redirect("app:user_profile")
         return render(request, "app/login.html", context={"form": form})
+
+
+class MyLoginView(LoginView):
+    template_name = 'app/login.html'
+    redirect_authenticated_user = True  # Данный флаг не позволит авторизированному
+    # пользователю зайти на страницу с авторизацией и сразу его перенаправит на
+    # ссылку редиректа. По умолчанию redirect_authenticated_user = False
 
 
 def logout_view(request):
