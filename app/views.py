@@ -1,9 +1,10 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from .models import get_random_text
 from django.http import HttpRequest, JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import TemplateForm
+from .forms import TemplateForm, AuthenticationForm, AuthenticationFormRusError, CustomUserCreationForm
 
 
 # def template_view(request):
@@ -48,17 +49,29 @@ def template_view(request):
         return render(request, 'app/template_form.html', context={"form": form})
 
 
+# def login_view(request):
+#     if request.method == "GET":
+#         return render(request, 'app/login.html')
+#
+#     if request.method == "POST":
+#         data = request.POST
+#         user = authenticate(username=data["username"], password=data["password"])
+#         if user:
+#             login(request, user)
+#             return redirect("app:user_profile")
+#         return render(request, "app/login.html", context={"error": "Неверные данные"})
 def login_view(request):
     if request.method == "GET":
         return render(request, 'app/login.html')
 
     if request.method == "POST":
         data = request.POST
-        user = authenticate(username=data["username"], password=data["password"])
-        if user:
+        form = AuthenticationFormRusError(request, data)
+        if form.is_valid():
+            user = form.get_user()
             login(request, user)
             return redirect("app:user_profile")
-        return render(request, "app/login.html", context={"error": "Неверные данные"})
+        return render(request, "app/login.html", context={"form": form})
 
 
 def logout_view(request):
@@ -72,7 +85,13 @@ def register_view(request):
         return render(request, 'app/register.html')
 
     if request.method == "POST":
-        return render(request, 'app/register.html')
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # Возвращает сохраненного пользователя из данных формы
+            login(request, user)
+            return redirect("app:user_profile")
+
+        return render(request, 'app/register.html', context={"form": form})
 
 
 def index_view(request):
